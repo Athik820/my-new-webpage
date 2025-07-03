@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ICST University Park</title>
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary: #003366;
+      --secondary: #e63946;
+      --accent: #f1c40f;
+      --light: #f8f9fa;
+      --dark: #343a40;
+      --text: #333333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-img {
+      height: 50px;
+    }
+
+    .logo-text h1 {
+      font-size: 1.5rem;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .logo-text p {
+      font-size: 0.8rem;
+      margin: 0;
+      opacity: 0.8;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    nav a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover:after {
+      width: 100%;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      height: 100vh;
+      background-image: url("TREE.jpg");
+      background-size: cover;
+      background-position: center;
+      color: rgba(11, 6, 2, 0.795);
+      display: flex;
+      align-items: center;
+      padding: 0 2rem;
+      margin-top: 80px;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      color: #fff; /* Make heading white */
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeSlideIn 1.2s ease-out forwards;
+    }
+
+    @keyframes fadeSlideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin-bottom: 2rem;
+      color: #fff; /* Make description white */
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn-secondary:hover {
+      background-color: white;
+      color: var(--primary);
+    }
+
+    section {
+      padding: 5rem 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .section-title h2:after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background-color: var(--accent);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .section-title p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--text);
+    }
+
+    .about {
+      background-color: var(--light);
+    }
+
+    .about-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .about-image {
+      flex: 1;
+      min-width: 300px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .programs {
+      background-color: white;
+    }
+
+    .programs-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      justify-content: center;
+    }
+
+    .program-card {
+      flex: 1;
+      min-width: 300px;
+      max-width: 350px;
+      background-color: var(--light);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .program-image {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .program-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .program-details {
+      padding: 1.5rem;
+    }
+
+    .program-details h3 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 3rem 2rem;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-section h3 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-section a {
+      color: #ccc;
+      text-decoration: none;
+    }
+
+    .footer-section a:hover {
+      color: white;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    /* Smooth fade for section titles and cards */
+    .section-title h2, .program-card, .about-image, .about-text, .footer-section {
+      transition: all 0.6s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    /* Button hover animation */
+    .btn-primary, .btn-secondary {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .btn-primary::before, .btn-secondary::before {
+      content: "";
+      position: absolute;
+      left: -100%;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, #ffd54f 0%, #fffbe7 100%);
+      z-index: -1;
+      transition: left 0.4s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    .btn-primary:hover::before, .btn-secondary:hover::before {
+      left: 0;
+    }
+    .btn-primary:hover, .btn-secondary:hover {
+      color: #003366 !important;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    /* Program card hover effect */
+    .program-card:hover {
+      box-shadow: 0 12px 32px rgba(0,33,71,0.13);
+      transform: translateY(-8px) scale(1.025) rotate(-1deg);
+      background: #fffbe7;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .about-content {
+        flex-direction: column;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header data-aos="fade-down">
+  <div class="header-container">
+    <div class="logo">
+      <img src="c:\Users\Athik\Desktop\WEBPAGE\icst logo - Copy.png" alt="ICST University Logo" class="logo-img" />
+      <div class="logo-text">
+        <h1>ICST University</h1>
+        <p>International Campus Of Science and Technology</p>
+      </div>
+    </div>
+    <nav>
+      <button class="mobile-menu-btn">☰</button>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#admissions">Admissions</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section id="home" class="hero" data-aos="fade-up">
+  <div class="hero-content">
+    <h1 data-aos="fade-right" data-aos-delay="100">WELCOME TO ICST UNIVERSITY PARK</h1>
+    <p data-aos="fade-left" data-aos-delay="200">Step into the future with ICST University where bold ideas meet real world impact. Become part of a dynamic community of forward thinkers, creators, and change makers.</p>
+    <div class="cta-buttons" data-aos="zoom-in" data-aos-delay="300">
+      <a href="#programs" class="btn btn-primary">Explore Programs</a>
+      <a href="#admissions" class="btn btn-secondary">Apply Now</a>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="section-title" data-aos="fade-up">
+    <h2>About ICST University</h2>
+    <p>A premier institution dedicated to excellence in science, technology, and innovation.</p>
+  </div>
+  <div class="about-content">
+    <div class="about-text" data-aos="fade-right" data-aos-delay="100">
+      <p>ICST University Park is a leading institution in science and technology education, established in 2005. With a focus on innovation, research, and hands on learning, ICST offers top tier undergraduate and postgraduate programs in Computer Science, IT, Electronics, and AI. The university provides modern facilities, experienced faculty, and strong industry partnerships, helping students succeed in both academics and careers. Located in a peaceful, tech friendly environment, ICST University Park is the ideal destination for future innovators and leaders.</p>
+    </div>
+    <div class="about-image" data-aos="fade-left" data-aos-delay="200">
+      <img src="c:\Users\Athik\Desktop\WEBPAGE\icst font - Copy.jpg" alt="ICST Campus" />
+    </div>
+  </div>
+</section>
+
+<section id="programs" class="programs">
+  <div class="section-title" data-aos="fade-up">
+    <h2>Our Academic Programs</h2>
+    <p>Choose from our wide range of modern undergraduate and graduate courses.</p>
+  </div>
+  <div class="programs-container">
+    <div class="program-card" data-aos="zoom-in" data-aos-delay="100">
+      <div class="program-image">
+        <img src="c:\Users\Athik\Desktop\ATHIK\ATHIK\img 2.webp" alt="Computing" />
+      </div>
+      <div class="program-details">
+        <h3>Computing</h3>
+        <p>Study AI, cybersecurity, and software development in our flagship technology program.</p>
+      </div>
+    </div>
+    <div class="program-card" data-aos="zoom-in" data-aos-delay="200">
+      <div class="program-image">
+        <img src="c:\Users\Athik\Desktop\ATHIK\ATHIK\engineer.webp" alt="Engineering" />
+      </div>
+      <div class="program-details">
+        <h3>Engineering</h3>
+        <p>Explore robotics, mechanics, and real-world engineering innovations with hands-on learning.</p>
+      </div>
+    </div>
+    <div class="program-card" data-aos="zoom-in" data-aos-delay="300">
+      <div class="program-image">
+        <img src="c:\Users\Athik\Desktop\WEBPAGE\markating - Copy.jpg" alt="Marketing" />
+      </div>
+      <div class="program-details">
+        <h3>Marketing</h3>
+        <p>Combine creative business skills with tech to become a new-age marketing leader.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="admissions" class="about">
+  <div class="section-title" data-aos="fade-up">
+    <h2>Admissions</h2>
+    <p>Start your journey at ICST University – where innovation meets excellence.</p>
+  </div>
+  <div class="about-content">
+    <div class="about-text" data-aos="fade-right" data-aos-delay="100">
+      <form action="mailto:admissions@icst.edu.lk" method="post" enctype="text/plain">
+        <div style="margin-bottom:1rem;">
+          <label for="name">FULL NAME</label>:</label><br />
+          <input type="text" id="name" name="Name" required style="width:100%; padding:0.5rem;">
+        </div>
+
+        <div>
+          <label for="name">NAME WITH INITIAL:</label><br />
+          <input type="text" id="name" name="Name" required style="width:100%; padding:0.5rem;">
+        </div>
+        <div>
+          <label for="name">GENDER:</label><br />
+          <input type="text" id="genter" name="genter" required style="width:100%; padding:0.5rem;">
+        </div>
+        <div>
+          <label for="name">CONTACT NUMBER:</label><br />
+          <input type="text" id="number" name="number" required style="width:100%; padding:0.5rem;">
+        </div>
+        <div>
+          <label for="name">WHATSAPP NUMBER:</label><br />
+          <input type="text" id="number" name="number" required style="width:100%; padding:0.5rem;">
+        </div>
+        <div>
+          <label for="name">NIC NO:</label><br />
+          <input type="text" id="name" name="Name" required style="width:100%; padding:0.5rem;">
+        </div>
+        <diV>
+          <label for="name">DISTRICT:</label><br />
+          <input type="text" id="name" name="Name" required style="width:100%; padding:0.5rem;">
+        </div>
+        <diV>
+          <label for="name">PROVINCE:</label><br />
+          <input type="text" id="name" name="Name" required style="width:100%; padding:0.5rem;">
+        </div>
+        <div>
+          <label for="name">ADDRESS:</label><br />
+          <input type="text" id="name" name="Name" required style="width:100%; padding:0.5rem;">
+        </div>
+        <div style="margin-bottom:1rem;">
+          <label for="email">E-MAIL:</label><br />
+          <input type="email" id="email" name="Email" required style="width:100%; padding:0.5rem;">
+        </div>
+        <div style="margin-bottom:1rem;">
+          <label for="program">PROGRAM:</label><br />
+          <select id="program" name="Program" required style="width:100%; padding:0.5rem;">
+            <option value="">Select Program</option>
+            <option value="Computing">Computing</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Marketing">Marketing</option>
+          </select>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <label for="message">MESSAGE:</label><br />
+          <textarea id="message" name="Message" rows="4" style="width:100%; padding:0.5rem;"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Application</button>
+      </form>
+    </div>
+    <div class="about-image" data-aos="fade-left" data-aos-delay="200">
+
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact-us" class="about">
+  <div class="section-title" data-aos="fade-up">
+    <h2>Contact Us</h2>
+    <p>We’re here to help! Reach out to ICST University for any questions or support.</p>
+  </div>
+  <div class="about-content">
+    <div class="about-text" data-aos="fade-right" data-aos-delay="100">
+      <form action="mailto:admissions@icst.edu.lk" method="post" enctype="text/plain">
+        <div style="margin-bottom:1rem;">
+          <label for="contact-name">Your Name:</label><br />
+          <input type="text" id="contact-name" name="Name" required style="width:100%; padding:0.5rem;">
+        </div>
+        <div style="margin-bottom:1rem;">
+          <label for="contact-email">Your Email:</label><br />
+          <input type="email" id="contact-email" name="Email" required style="width:100%; padding:0.5rem;">
+        </div>
+        <div style="margin-bottom:1rem;">
+          <label for="contact-message">Message:</label><br />
+          <textarea id="contact-message" name="Message" rows="4" required style="width:100%; padding:0.5rem;"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+    </div>
+    <div class="about-image" data-aos="fade-left" data-aos-delay="200">
+      <div style="background:var(--light);padding:2rem;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,0.05);">
+        <h3 style="color:var(--primary);margin-bottom:1rem;">Contact Details</h3>
+        <p><strong>Address:</strong><br>ICST University Park, Main Road, Colombo, Sri Lanka</p>
+        <p><strong>Phone:</strong> +94 743444444<br><strong>Mobile:</strong> 723</p>
+        <p><strong>Email:</strong> admissions@icst.edu.lk</p>
+        <p><strong>Hours:</strong> Mon-Fri, 8:00am - 5:00pm</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer id="contact" data-aos="fade-up">
+  <div class="footer-container">
+    <div class="footer-section" data-aos="fade-right" data-aos-delay="100">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#">- Home</a></li>
+        <li><a href="#">- About</a></li>
+        <li><a href="#">- Programs</a></li>
+        <li><a href="#">- Admissions</a></li>
+        <li><a href="contact.html">- Contact</a></li>
+        
+      </ul>
+    </div>
+    <div class="footer-section" data-aos="fade-left" data-aos-delay="200">
+      <h3>Programs</h3>
+      <ul>
+        <li><a href="#">- Undergraduate</a></li>
+        <li><a href="#">- Graduate</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="copyright">
+    &copy; 2025 ICST University. All rights reserved.
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 900,
+    once: true,
+    easing: 'ease-in-out'
+  });
+</script>
+
+</body>
+</html>
